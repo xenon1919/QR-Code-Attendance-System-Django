@@ -1,0 +1,264 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Attendance System - View Employee Attendance</title>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="{% static 'datetimepicker.js' %}"
+    ></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background-color: #f3f4f6;
+        color: #1f2937;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      header {
+        background: linear-gradient(to right, #3b82f6, #1d4ed8);
+        padding: 2.5rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+      header svg {
+        width: 60px;
+        height: 60px;
+        fill: #ffffff;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      }
+      header h1 {
+        color: #ffffff;
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      nav {
+        background-color: #ffffff;
+        padding: 1rem 0;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #1f2937;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+      }
+      nav ul li a:hover {
+        background-color: #3b82f6;
+        color: #ffffff;
+      }
+      .form-container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        max-width: 500px;
+        margin: 2rem auto;
+        text-align: center;
+      }
+      .form-container h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #1f2937;
+      }
+      .form-container .error-message {
+        color: #dc2626;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form-container label {
+        font-weight: 500;
+        color: #4b5563;
+        text-align: left;
+      }
+      .form-container .input-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .form-container input[type="text"] {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+      .form-container input[type="text"]:focus {
+        border-color: #3b82f6;
+        outline: none;
+      }
+      .form-container input[type="submit"] {
+        background-color: #3b82f6;
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .form-container input[type="submit"]:hover {
+        background-color: #1d4ed8;
+      }
+      .form-container img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+      .attendance-data {
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+      @media (max-width: 768px) {
+        nav ul {
+          flex-direction: column;
+          align-items: center;
+        }
+        header {
+          padding: 2rem 0;
+        }
+        header h1 {
+          font-size: 2rem;
+        }
+        header svg {
+          width: 40px;
+          height: 40px;
+        }
+        .form-container {
+          padding: 1.5rem;
+          margin: 1rem;
+        }
+      }
+      @media (max-width: 480px) {
+        header {
+          flex-direction: row;
+          gap: 0.5rem;
+        }
+        header h1 {
+          font-size: 1.5rem;
+        }
+        header svg {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-4v-2h4v2zm3-4h-7v-2h7v2zm0-4h-7V7h7v2z"
+          />
+        </svg>
+        <h1>Employee Attendance System</h1>
+      </div>
+    </header>
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="{% url 'AddEmp' %}">Create Employee Data</a></li>
+          <li><a href="{% url 'ViewEmp' %}">View Employee Data</a></li>
+          <li>
+            <a href="{% url 'ViewEmpAttendance' %}">View Employee Attendance</a>
+          </li>
+          <li><a href="{% url 'index' %}">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="form-container">
+        <h2>Employee Attendance</h2>
+        {% if data %}
+        <div class="error-message">{{ data|safe }}</div>
+        {% endif %} {% if data1 %}
+        <div class="attendance-data">{{ data1|safe }}</div>
+        {% endif %}
+        <form
+          name="f1"
+          method="post"
+          action="{% url 'ViewEmpAttendanceAction' %}"
+        >
+          {% csrf_token %}
+          <div>
+            <label for="from-date">From Date</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="demo"
+                name="t2"
+                required
+                maxlength="25"
+                size="20"
+              />
+              <a href="javascript:NewCal('demo','ddmmmyyyy',false,24)">
+                <img
+                  src="{% static 'cal.gif' %}"
+                  width="20"
+                  height="20"
+                  alt="Pick a date"
+                />
+              </a>
+            </div>
+          </div>
+          <div>
+            <label for="to-date">To Date</label>
+            <div class="input-group">
+              <input
+                type="text"
+                id="demo1"
+                name="t3"
+                required
+                maxlength="25"
+                size="20"
+              />
+              <a href="javascript:NewCal('demo1','ddmmmyyyy',false,24)">
+                <img
+                  src="{% static 'cal.gif' %}"
+                  width="20"
+                  height="20"
+                  alt="Pick a date"
+                />
+              </a>
+            </div>
+          </div>
+          <input type="submit" value="Get Attendance" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
