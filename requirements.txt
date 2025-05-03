@@ -1,0 +1,6 @@
+PyMySQL
+Django
+PyQRCode
+numpy
+opencv-python
+opencv-contrib-python
